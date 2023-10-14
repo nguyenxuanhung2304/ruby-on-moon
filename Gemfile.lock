@@ -1,0 +1,21 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    cgi (0.3.6)
+    erb (4.0.3)
+      cgi (>= 0.3.3)
+    nio4r (2.5.9)
+    puma (6.4.0)
+      nio4r (~> 2.0)
+    rack (3.0.8)
+
+PLATFORMS
+  x86_64-darwin-22
+
+DEPENDENCIES
+  erb (~> 4.0)
+  puma
+  rack (~> 3.0)
+
+BUNDLED WITH
+   2.4.10
