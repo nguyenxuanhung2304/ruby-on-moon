@@ -8,8 +8,20 @@ class App
 
     status = 200
 
-    html_response = File.read('views/index.html')
+    title = get_title(env)
+    response_html = ERB.new(html_template).result(binding)
 
-    [status, headers, [html_response]]
+    [status, headers, [response_html]]
+  end
+
+  private
+
+  def html_template
+    File.read('views/index.html.erb')
+  end
+
+  def get_title(env)
+    query_string = env['QUERY_STRING']
+    query_string.split('=')[1] || 'Weby'
   end
 end
