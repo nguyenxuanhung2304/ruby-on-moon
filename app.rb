@@ -1,4 +1,6 @@
 require 'erb'
+require_relative './router'
+require_relative './config/routes'
 
 class App
   def call(env)
@@ -8,8 +10,7 @@ class App
 
     status = 200
 
-    title = get_title(env)
-    response_html = ERB.new(html_template).result(binding)
+    response_html = router.build_response(env)
 
     [status, headers, [response_html]]
   end
@@ -22,6 +23,10 @@ class App
 
   def get_title(env)
     query_string = env['QUERY_STRING']
-    query_string.split('=')[1] || 'Weby'
+    query_string.split('=')[1] || 'Ruby on Moon'
+  end
+
+  def router
+    Router.instance
   end
 end
