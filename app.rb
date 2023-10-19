@@ -1,4 +1,3 @@
-require 'erb'
 require_relative './router'
 require_relative './config/routes'
 
@@ -16,10 +15,6 @@ class App
   end
 
   private
-
-  def html_template
-    File.read('views/index.html.erb')
-  end
 
   def get_title(env)
     query_string = env['QUERY_STRING']
