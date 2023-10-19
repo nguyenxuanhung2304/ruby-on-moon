@@ -1,4 +1,5 @@
 require 'erb'
+require 'pry'
 
 class ApplicationController
   attr_reader :env, :params, :resource_name
@@ -9,17 +10,8 @@ class ApplicationController
     @resource_name = resource_name
   end
 
-  # def index
-  #   render :index
-  # end
-  #
-  def show
-    # render :show
-  end
-
   def render(view_template)
     erb = ERB.new(File.read(view_template))
-    puts "view_template = #{view_template}"
     erb.result(get_binding)
   end
 

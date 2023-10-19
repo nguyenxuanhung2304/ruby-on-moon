@@ -1,10 +1,15 @@
 require 'singleton'
 require 'pry'
+require 'zeitwerk'
 
 class Router
   include Singleton
 
   def initialize
+    # FIXME: use loader in app.rb instead of here
+    loader = Zeitwerk::Loader.new
+    loader.push_dir('controllers')
+    loader.setup
     @routes = {}
   end
 
@@ -21,8 +26,8 @@ class Router
       resource_name, controller_klass, action = make_controller_klass(path)
       @routes[path.prepend('/')] = lambda do |env|
         controller = controller_klass.new(env, resource_name)
-        controller.render("views/#{resource_name}/#{action}.html.erb")
         controller.send(action.to_sym)
+        controller.render("views/#{resource_name}/#{action}.html.erb")
       end
     end
   end
@@ -42,13 +47,6 @@ class Router
 
   private
 
-  def load_controller(resource_name)
-    controller_file_path = "./controllers/#{resource_name}_controller.rb"
-    raise ArgumentError, "Controller not found: #{file_path}" unless File.exist?(controller_file_path)
-
-    require_relative controller_file_path
-  end
-
   def constantize(class_name)
     klass = Object.const_get(class_name)
     raise NameError unless klass.is_a?(Class)
@@ -58,7 +56,6 @@ class Router
 
   def make_controller_klass(path)
     resource_name, action = path.split('/')
-    load_controller(resource_name)
     controller_klass = constantize("#{resource_name.capitalize}Controller")
     return resource_name, controller_klass, action
   end
