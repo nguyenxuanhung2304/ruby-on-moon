@@ -1,21 +1,12 @@
 require 'singleton'
-require 'pry'
-require 'zeitwerk'
-require_relative '../utils/parser'
 
 class Router
-  attr_reader :path
-  attr_reader :env
+  attr_reader :path, :env
 
   include Singleton
   include Parser
 
   def initialize
-    # FIXME: use loader in app.rb instead of here
-    loader = Zeitwerk::Loader.new
-    loader.push_dir('controllers')
-    loader.push_dir('utils')
-    loader.setup
     @routes = {}
   end
 

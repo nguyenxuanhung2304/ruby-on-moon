@@ -1,5 +1,4 @@
 require 'erb'
-require 'pry'
 
 class ApplicationController
   attr_reader :env, :params, :resource_name

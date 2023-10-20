@@ -4,7 +4,7 @@ module Parser
   def resource_controller
     resource_name, controller_klass, action = make_controller_klass
     instance_klass = controller_klass.new(env, resource_name)
-    view_template = "views/#{resource_name}/#{action}.html.erb"
+    view_template = "app/views/#{resource_name}/#{action}.html.erb"
     [instance_klass, view_template, action]
   end
 

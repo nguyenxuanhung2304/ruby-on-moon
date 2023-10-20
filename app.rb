@@ -1,10 +1,12 @@
-require_relative 'config/routes'
-require 'logger'
 require 'pry'
-require 'fileutils'
 
 class App
   attr_reader :logger
+
+  def initialize
+    # FIXME: load config/routes outside initialize method
+    require_relative 'config/routes'
+  end
 
   def call(env)
     headers = { 'Content-Type' => 'text/html' }

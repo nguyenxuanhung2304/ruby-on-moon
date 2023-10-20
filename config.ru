@@ -1,6 +1,8 @@
 require 'rack'
 require_relative 'app'
-require_relative 'middleware/logging'
+require_relative 'loader'
+
+Loader.new.load
 
 use Rack::Reloader, 0
 

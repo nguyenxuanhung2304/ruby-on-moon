@@ -1,5 +1,4 @@
 require 'logger'
-require 'pry'
 
 class Logging
   attr_reader :logger, :path, :env
