@@ -1,6 +1,11 @@
 require_relative 'config/routes'
+require 'logger'
+require 'pry'
+require 'fileutils'
 
 class App
+  attr_reader :logger
+
   def call(env)
     headers = { 'Content-Type' => 'text/html' }
 

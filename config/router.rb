@@ -1,14 +1,20 @@
 require 'singleton'
 require 'pry'
 require 'zeitwerk'
+require_relative '../utils/parser'
 
 class Router
+  attr_reader :path
+  attr_reader :env
+
   include Singleton
+  include Parser
 
   def initialize
     # FIXME: use loader in app.rb instead of here
     loader = Zeitwerk::Loader.new
     loader.push_dir('controllers')
+    loader.push_dir('utils')
     loader.setup
     @routes = {}
   end
@@ -23,11 +29,12 @@ class Router
     if blk
       @routes[path] = blk
     elsif path.include? '/'
-      resource_name, controller_klass, action = make_controller_klass(path)
       @routes[path.prepend('/')] = lambda do |env|
-        controller = controller_klass.new(env, resource_name)
+        @path = env['REQUEST_PATH']
+        @env = env
+        controller, view_template, action = resource_controller
         controller.send(action.to_sym)
-        controller.render("views/#{resource_name}/#{action}.html.erb")
+        controller.render(view_template)
       end
     end
   end
@@ -43,20 +50,5 @@ class Router
     path = env['REQUEST_PATH']
     handler = @routes[path] || -> { "no route found for #{path}" }
     handler.call(env)
-  end
-
-  private
-
-  def constantize(class_name)
-    klass = Object.const_get(class_name)
-    raise NameError unless klass.is_a?(Class)
-
-    klass
-  end
-
-  def make_controller_klass(path)
-    resource_name, action = path.split('/')
-    controller_klass = constantize("#{resource_name.capitalize}Controller")
-    return resource_name, controller_klass, action
   end
 end
