@@ -11,6 +11,7 @@ GEM
     puma (6.4.0)
       nio4r (~> 2.0)
     rack (3.0.8)
+    rake (13.0.6)
     sequel (5.73.0)
       bigdecimal
 
@@ -21,6 +22,7 @@ DEPENDENCIES
   pry (~> 0.14.2)
   puma
   rack (~> 3.0)
+  rake
   sequel
 
 BUNDLED WITH
