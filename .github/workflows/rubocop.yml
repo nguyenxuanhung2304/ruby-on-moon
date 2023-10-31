@@ -1,0 +1,15 @@
+on:
+  pull_request:
+    types:
+      - opened
+jobs:
+  run_command:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run your commands here
+      run: |
+        bundle exec rubocop
