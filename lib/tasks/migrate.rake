@@ -21,8 +21,8 @@ namespace :db do
           change do
             create_table(:name) do
               primary_key :id
-              String :column1
-              String :column2
+              String :name
+              Integer :age
             end
           end
         end

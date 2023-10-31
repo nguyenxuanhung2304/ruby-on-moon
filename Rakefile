@@ -11,10 +11,11 @@ class RakeTask
   extend FileParser
 
   # @method initialize
-  # Load all rake tasks in lib/tasks directory.
+  # Load all rake tasks in lib/tasks, app/models directory.
   # @return [RakeTask]
   def initialize
-    RakeTask.load_files('lib/tasks')
+    RakeTask.load_files 'lib/tasks'
+    RakeTask.load_files 'app/models'
   end
 end
 
