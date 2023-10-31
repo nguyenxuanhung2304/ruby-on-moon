@@ -1,6 +1,8 @@
 require 'pry'
 
+# This module representing for parser utils
 module Parser
+  # @return [Array] An array constaining three values
   def resource_controller
     resource_name, controller_klass, action = make_controller_klass
     instance_klass = controller_klass.new(env, resource_name)
