@@ -6,7 +6,7 @@ on:
       - opened
 
 jobs:
-  run_commands:
+  rubocop:
     runs-on: ubuntu-latest
 
     steps:
