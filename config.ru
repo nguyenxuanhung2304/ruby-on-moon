@@ -1,6 +1,6 @@
 require 'rack'
-require_relative 'app'
 require_relative 'loader'
+require_relative 'app'
 
 Loader.new.load
 

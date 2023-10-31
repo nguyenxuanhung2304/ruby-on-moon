@@ -1,10 +1,11 @@
 require 'pry'
+require 'sequel'
 
 class App
   attr_reader :logger
 
   def initialize
-    # FIXME: load config/routes outside initialize method
+    # FIXME: load outside App#initialize
     require_relative 'config/routes'
   end
 

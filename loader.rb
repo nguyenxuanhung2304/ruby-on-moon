@@ -1,35 +1,33 @@
 require 'zeitwerk'
+require_relative 'utils/file_parser'
+require_relative 'db/database'
 
 class Loader
+  ALLOW_DIRS = %w[app config utils middleware].freeze
+  EXCEPT_DIRS = %w[db/migrations].freeze
+
   attr_reader :loader
 
+  include FileParser
+
   def initialize
+    DB::Database.instance
     @loader = Zeitwerk::Loader.new
   end
 
   def load
-    load_dir('app')
-    load_dir('config')
-    load_dir('utils')
-    load_dir('middleware')
+    EXCEPT_DIRS.each { |dir| loader_ignore(dir) }.freeze
+    ALLOW_DIRS.each { |dir| load_dir(dir, method(:loader_push)) }
     loader.setup
   end
 
   private
 
-  def load_dir(base_dir)
-    subdirs = subdirectories(base_dir)
-    return loader.push_dir(File.expand_path(base_dir)) if subdirs.empty?
-
-    subdirs.each do |subdir|
-      loader.push_dir(File.expand_path("app/#{subdir}", __dir__))
-    end
+  def loader_push(dir)
+    loader.push_dir(File.join(Dir.pwd, dir))
   end
 
-  def subdirectories(base_dir)
-    entries = Dir.entries(base_dir)
-    entries.select do |entry|
-      entry != '.' && entry != '..' && File.directory?(File.join(base_dir, entry))
-    end
+  def loader_ignore(dir)
+    loader.ignore(File.expand_path(dir, __dir__))
   end
 end
