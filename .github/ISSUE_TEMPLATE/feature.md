@@ -1,8 +1,8 @@
 ---
 name: Feature
 about: Detailed description a feature
-title: 'feat'
-labels: ''
+title: '[FEAT]'
+labels: 'feat'
 assignees: 'nguyenxuanhung2304'
 
 ---
