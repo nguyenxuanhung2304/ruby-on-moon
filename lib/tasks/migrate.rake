@@ -1,11 +1,7 @@
-require_relative '../../db/database'
-
-db = DB::Database.instance.connect
-
 namespace :db do
   desc 'Run migrate'
   task :migrate do
-    Sequel::Migrator.run(db, 'db/migrations', allow_missing_migration_files: true)
+    Sequel::Migrator.run(DATABASE, 'db/migrations', allow_missing_migration_files: true)
     puts 'Run migrate'
   end
 

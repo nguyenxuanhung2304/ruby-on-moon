@@ -13,7 +13,6 @@ class Loader
 
   # Initialize the Loader and set up Zeitwerk.
   def initialize
-    DB::Database.instance
     @loader = Zeitwerk::Loader.new
   end
 

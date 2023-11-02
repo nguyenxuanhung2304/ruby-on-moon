@@ -19,6 +19,7 @@ module DB
     # Initializes a new instance of Database and establishes a database connection using Sequel.
     def initialize
       # FIXME: move Sequel config to an XML file
+      Sequel.extension :migration
       @connect = Sequel.connect(
         adapter: 'mysql2',
         host: 'localhost',
@@ -26,9 +27,6 @@ module DB
         password: '',
         database: 'ruby_on_moon_dev'
       )
-
-      # Load Sequel migrations extension.
-      Sequel.extension :migration
     end
   end
 end
