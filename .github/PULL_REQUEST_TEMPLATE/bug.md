@@ -1,8 +1,8 @@
 ---
-name: Feature
-about: Detailed description a PR
-title: '[FEAT]'
-labels: 'feat'
+name: Bug
+about: Detailed description a bug
+title: '[BUG]'
+labels: 'bug'
 assignees: 'nguyenxuanhung2304'
 
 ---
