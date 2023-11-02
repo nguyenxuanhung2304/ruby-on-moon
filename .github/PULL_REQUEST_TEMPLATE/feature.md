@@ -3,7 +3,7 @@ name: Feature
 about: Detailed description a PR
 title: '[FEAT]'
 labels: 'feat'
-assignees: 'nguyenxuanhung2304'
+assignees: 'nguyenxuanhung-rightsvn'
 
 ---
 ## About this PR
