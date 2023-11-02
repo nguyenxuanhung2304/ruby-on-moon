@@ -3,7 +3,7 @@ name: Bug
 about: Detailed description a bug
 title: '[BUG]'
 labels: 'bug'
-assignees: 'nguyenxuanhung2304'
+assignees: 'nguyenxuanhung-rightsvn'
 
 ---
 ## About this PR
