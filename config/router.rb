@@ -28,9 +28,9 @@ class Router
   class << self
     # Defines routes using a block.
     #
-    # @yield [blk] The block containing route definitions.
-    def draw(&blk)
-      Router.instance.instance_exec(&blk)
+    # @yield [anonymous block] The block containing route definitions.
+    def draw(&)
+      Router.instance.instance_exec(&)
     end
   end
 
