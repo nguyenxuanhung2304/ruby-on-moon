@@ -1,6 +1,10 @@
 name: Run rubocop
 
-on: [pull_request]
+on: 
+  pull_request:
+    paths:
+      - '**/*.rb'
+      - '*.rb'
 
 jobs:
   rubocop:
