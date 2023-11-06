@@ -1,4 +1,5 @@
 namespace :db do
+  desc "Create the database"
   task :create do
     # FIXME: reuse conn in another place
     conn = Sequel.connect(
