@@ -2,6 +2,7 @@
 
 source 'https://rubygems.org'
 
+gem 'dotenv'
 gem 'mysql2', '>= 0.4.4'
 gem 'pry', '~> 0.14.2'
 gem 'puma'

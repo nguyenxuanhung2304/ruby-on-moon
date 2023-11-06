@@ -1,3 +1,5 @@
+require 'dotenv/load'
+
 # DbHelper: Use for database
 module DbHelper
   # Requires model files and loads them into the application if their corresponding database tables exist.
@@ -21,6 +23,13 @@ module DbHelper
       # If the database table exists for the model, require and load the model file
       require File.join(Dir.pwd, base_dir, file_name) if table_existed
     end
+  end
+
+  def load_db_config
+    config_path = File.join(Dir.pwd, '/config/database.yml')
+    yaml_config = File.read(config_path)
+    erb_config = ERB.new(yaml_config).result
+    YAML.safe_load(erb_config, aliases: true)
   end
 
   private

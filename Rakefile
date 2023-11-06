@@ -1,6 +1,7 @@
 require 'sequel'
 require 'rake'
 require 'pry'
+require 'dotenv/tasks'
 
 require_relative 'utils/file_parser'
 require_relative 'utils/db_helper'

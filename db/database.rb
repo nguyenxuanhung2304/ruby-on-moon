@@ -1,6 +1,8 @@
 require 'sequel'
 require 'singleton'
 
+require_relative '../utils/db_helper'
+
 # The `DB` module provides a database connection using Sequel and follows the Singleton pattern.
 #
 # This module contains the `Database` class, which ensures that only one database connection instance exists.
@@ -16,16 +18,21 @@ module DB
     # Includes the Singleton module to ensure a single instance of Database.
     include Singleton
 
+    extend DbHelper
+
     # Initializes a new instance of Database and establishes a database connection using Sequel.
     def initialize
-      # FIXME: move Sequel config to an XML file
+      config = DB::Database.load_db_config
+      dev_config = config['development']
+
       Sequel.extension :migration
+
       @connect = Sequel.connect(
-        adapter: 'mysql2',
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'ruby_on_moon_dev'
+        adapter: dev_config['adapter'],
+        host: dev_config['host'],
+        user: dev_config['username'],
+        password: dev_config['password'],
+        database: dev_config['database']
       )
     end
   end
