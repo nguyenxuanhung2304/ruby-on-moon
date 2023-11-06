@@ -23,6 +23,7 @@ class RakeTask
   end
 
   def existed_db?
+    # FIXME: reuse conn in another place
     conn = Sequel.connect(
       adapter: 'mysql2',
       host: 'localhost',

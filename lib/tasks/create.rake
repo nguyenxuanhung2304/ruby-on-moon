@@ -1,5 +1,6 @@
 namespace :db do
   task :create do
+    # FIXME: reuse conn in another place
     conn = Sequel.connect(
       adapter: 'mysql2',
       host: 'localhost',
