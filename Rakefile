@@ -38,5 +38,5 @@ class RakeTask
   end
 end
 
-DATABASE = DB::Database.new.connect if RakeTask.existed_db?
+DATABASE = DB::Database.instance.connect if RakeTask.existed_db?
 RakeTask.load_tasks

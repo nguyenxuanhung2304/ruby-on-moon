@@ -12,7 +12,7 @@ module DbHelper
   #
   # @return [void]
   def require_models
-    Sequel::Model.db = DB::Database.new.connect
+    Sequel::Model.db = DB::Database.instance.connect
 
     models.each do |file_name|
       plural_name = pluralize_file_name(file_name)
