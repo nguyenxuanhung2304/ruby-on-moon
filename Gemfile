@@ -8,8 +8,10 @@ gem 'puma'
 gem 'rack', '~> 3.0'
 gem 'rake'
 gem 'sequel'
+gem 'zeitwerk'
 
 group :development do
+  gem 'minitest'
   gem 'pry', '~> 0.14.2'
   gem 'rubocop', require: false
 end

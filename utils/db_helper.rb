@@ -1,4 +1,6 @@
 require 'dotenv/load'
+require 'erb'
+require 'yaml'
 
 # DbHelper: Use for database
 module DbHelper
@@ -9,6 +11,7 @@ module DbHelper
   #
   # @return [void]
   def require_models
+    Sequel::Model.db = DB::Database.new.connect
     base_dir = 'app/models'
 
     # Get a list of file names in the 'app/models' directory
@@ -18,10 +21,13 @@ module DbHelper
 
     file_names.each do |file_name|
       plural_name = pluralize_file_name(file_name)
-      table_existed = DATABASE.table_exists?(plural_name.to_sym)
+      table_existed = Sequel::Model.db.table_exists?(plural_name.to_sym)
 
       # If the database table exists for the model, require and load the model file
-      require File.join(Dir.pwd, base_dir, file_name) if table_existed
+      if table_existed
+        path = File.join(Dir.pwd, base_dir, file_name)
+        require_relative(path)
+      end
     end
   end
 
@@ -41,7 +47,7 @@ module DbHelper
   def pluralize_file_name(file_name)
     basename = File.basename(file_name, '.rb')
     plural_name = basename.gsub(/y$/, 'ies')
-    plural_name = "#{file_name}s" if plural_name == file_name
+    plural_name = "#{plural_name}s" if plural_name == basename
     plural_name
   end
 end

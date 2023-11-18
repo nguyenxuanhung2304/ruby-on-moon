@@ -1,5 +1,4 @@
 require 'sequel'
-require 'singleton'
 
 require_relative '../utils/db_helper'
 
@@ -14,9 +13,6 @@ module DB
     # @!attribute [r] connect
     #   @return [Sequel::Database] The Sequel database connection instance.
     attr_reader :connect
-
-    # Includes the Singleton module to ensure a single instance of Database.
-    include Singleton
 
     extend DbHelper
 
