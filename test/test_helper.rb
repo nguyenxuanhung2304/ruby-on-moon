@@ -1,11 +1,9 @@
 require 'minitest/autorun'
 require 'pry'
 require 'zeitwerk'
-require_relative '../loader'
-require_relative '../db/database'
 
-Sequel::Model.db = DB::Database.instance.connect
-Loader.new.load_test
+require_relative 'fixture'
 
 class TestHelper < Minitest::Test
+  include Fixture
 end

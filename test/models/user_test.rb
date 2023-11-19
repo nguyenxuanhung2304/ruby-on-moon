@@ -2,7 +2,7 @@ require_relative '../test_helper'
 
 class UserTest < TestHelper
   def setup
-    @user = User.new({ name: 'user', age: 21 })
+    @user = users(:one)
   end
 
   def test_name_cannot_empty

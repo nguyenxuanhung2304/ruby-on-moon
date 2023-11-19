@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'dotenv'
+gem 'dry-inflector', '~> 1.0'
 gem 'mysql2', '>= 0.4.4'
 gem 'puma'
 gem 'rack', '~> 3.0'
