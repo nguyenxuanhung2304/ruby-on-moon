@@ -7,7 +7,7 @@ on:
       - '*.rb'
 
 jobs:
-  rubocop:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,3 +25,7 @@ jobs:
       - name: Run rubocop
         run: |
           bundle exec rubocop
+
+      - name: Run minitest
+        run: |
+          bundle exec rake test
