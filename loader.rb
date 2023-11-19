@@ -1,11 +1,11 @@
 require 'zeitwerk'
 require_relative 'utils/file_parser'
-require_relative 'db/database'
 
 # A class responsible for loading application files using Zeitwerk.
 class Loader
   ALLOW_DIRS = %w[app config utils middleware].freeze
   EXCEPT_DIRS = %w[db/migrations].freeze
+  TEST_DIRS = %w[app].freeze
 
   attr_reader :loader
 
@@ -20,6 +20,11 @@ class Loader
   def load
     EXCEPT_DIRS.each { |dir| loader_ignore(dir) }.freeze
     ALLOW_DIRS.each { |dir| load_dir(dir, method(:loader_push)) }
+    loader.setup
+  end
+
+  def load_test
+    TEST_DIRS.each { |dir| load_dir(dir, method(:loader_push)) }
     loader.setup
   end
 
