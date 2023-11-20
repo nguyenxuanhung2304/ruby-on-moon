@@ -1,14 +1,24 @@
 name: Run rubocop
-
 on: 
   pull_request:
     paths:
       - '**/*.rb'
       - '*.rb'
-
+env:
+  DATABASE_HOST: 127.0.0.1
+  DATABASE_USERNAME: root
+  DATABASE_NAME: ci_test
+  RAILS_ENV: test
 jobs:
   ci:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
 
     steps:
       - name: Checkout code
@@ -17,6 +27,11 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+
+      - name: Create database and migrate tables
+        run: |
+          bundle exec rake db:create
+          bundle exec rake db:migrate
 
       - name: Get bundle dependencies
         run: |
