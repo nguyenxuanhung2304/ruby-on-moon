@@ -5,10 +5,16 @@ on:
       - '**/*.rb'
       - '*.rb'
 env:
-  DATABASE_HOST: 127.0.0.1
-  DATABASE_USERNAME: root
-  DATABASE_NAME: ci_test
-  RAILS_ENV: test
+  DATABASE_HOST: localhost
+  DATABASE_NAME: ruby_on_moon_ci_test
+  DATABASE_USER: root
+  DATABASE_PASSWORD: ''
+  DATABASE_ADAPTER: mysql2
+  MYSQL_HOST: 127.0.0.1
+  MYSQL_DB: github_actions_test
+  MYSQL_USER: root
+  MYSQL_ALLOW_EMPTY_PASSWORD: yes
+  MYSQL_PASSWORD:
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -19,6 +25,16 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          DATABASE_HOST: localhost
+          DATABASE_NAME: ruby_on_moon_ci_test
+          DATABASE_USER: root
+          DATABASE_PASSWORD: ''
+          DATABASE_ADAPTER: mysql2
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_DB: github_actions_test
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_PASSWORD:
 
     steps:
       - name: Checkout code
