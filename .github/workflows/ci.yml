@@ -5,10 +5,11 @@ on:
       - '**/*.rb'
       - '*.rb'
 env:
-  DATABASE_HOST: 127.0.0.1
-  DATABASE_USERNAME: root
-  DATABASE_NAME: ci_test
-  RAILS_ENV: test
+  DATABASE_HOST: localhost
+  DATABASE_NAME: ruby_on_moon_ci_test
+  DATABASE_USER: root
+  DATABASE_PASSWORD: ''
+  DATABASE_ADAPTER: mysql2
 jobs:
   ci:
     runs-on: ubuntu-latest
