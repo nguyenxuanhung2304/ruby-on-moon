@@ -4,37 +4,10 @@ on:
     paths:
       - '**/*.rb'
       - '*.rb'
-env:
-  DATABASE_HOST: localhost
-  DATABASE_NAME: ruby_on_moon_ci_test
-  DATABASE_USER: root
-  DATABASE_PASSWORD: ''
-  DATABASE_ADAPTER: mysql2
-  MYSQL_HOST: 127.0.0.1
-  MYSQL_DB: github_actions_test
-  MYSQL_USER: root
-  MYSQL_ALLOW_EMPTY_PASSWORD: yes
-  MYSQL_PASSWORD:
 jobs:
   ci:
     runs-on: ubuntu-latest
     services:
-      mysql:
-        image: mysql:5.7
-        ports:
-          - 3306:3306
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          DATABASE_HOST: localhost
-          DATABASE_NAME: ruby_on_moon_ci_test
-          DATABASE_USER: root
-          DATABASE_PASSWORD: ''
-          DATABASE_ADAPTER: mysql2
-          MYSQL_HOST: 127.0.0.1
-          MYSQL_DB: github_actions_test
-          MYSQL_USER: root
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_PASSWORD:
 
     steps:
       - name: Checkout code
@@ -43,6 +16,18 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+
+      - uses: mirromutth/mysql-action@v1.1
+        with:
+          host port: 3800 # Optional, default value is 3306. The port of host
+          container port: 3307 # Optional, default value is 3306. The port of container
+          character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
+          collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
+          mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
+          mysql database: 'ci_test' # Optional, default value is "test". The specified database which will be create
+          mysql root password: ''
+          mysql user: 'root'
+          mysql password: ''
 
       - name: Create database and migrate tables
         run: |
