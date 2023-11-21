@@ -1,9 +1,8 @@
-class User < Sequel::Model
-  plugin :validation_helpers
-
+class User < ApplicationModel
   def validate
     super
 
-    validates_presence %i[name age]
+    validates_presence %i[name]
+    validates_presence %i[age]
   end
 end
