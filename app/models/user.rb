@@ -1,4 +1,6 @@
-class User < ApplicationModel
+class User < Sequel::Model
+  plugin :validation_helpers
+
   def validate
     super
 
