@@ -77,7 +77,6 @@ def build_migration(model, inflector)
 end
 
 def build_controller(controller, inflector)
-  # admin => AdminsController
   pluralize_model = inflector.pluralize(controller)
   controller = inflector.classify("#{pluralize_model}Controller")
   helper = inflector.classify("#{pluralize_model}Helper")
@@ -93,6 +92,8 @@ def build_controller(controller, inflector)
       end
     RUBY
   end
+
+  puts "create: #{path}"
 end
 
 def build_controller_helper(controller, inflector)
@@ -107,6 +108,8 @@ def build_controller_helper(controller, inflector)
       end
     RUBY
   end
+
+  puts "create: #{path}"
 end
 
 namespace :generate do
