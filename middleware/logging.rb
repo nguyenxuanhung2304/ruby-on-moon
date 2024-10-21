@@ -1,3 +1,4 @@
+require 'logger'
 # The `Logging` class is responsible for logging information about HTTP requests and responses.
 #
 # This middleware class logs request and response details to a log file, including information

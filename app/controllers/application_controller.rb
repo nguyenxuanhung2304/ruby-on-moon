@@ -16,6 +16,7 @@ class ApplicationController
     @env = env
     @params = build_params(env)
     @resource_name = resource_name
+    @before_actions = []
   end
 
   # Renders a view template using ERB (Embedded Ruby) rendering engine.
@@ -25,6 +26,18 @@ class ApplicationController
   def render(view_template)
     erb = ERB.new(File.read(view_template))
     erb.result(binding)
+  end
+
+  def before_action(action)
+    @before_actions << action
+  end
+
+  def execute_before_action
+    @before_actions.each { |action| send(action) }
+  end
+
+  def index
+    binding.pry
   end
 
   private
